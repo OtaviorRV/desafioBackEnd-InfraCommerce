@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: desafioBackEnd-InfraCommerce
+    volumes:
+      - .:/usr/src/app  # Mapeia o diretório de trabalho da aplicação
+      - /usr/src/app/node_modules  # Evita sobrescrever o node_modules no container
+    environment:
+      - NODE_ENV=development  # Define o ambiente como desenvolvimento
+    expose:
+      - '3000'  # Expondo a porta 3000 no container para o Docker Compose
+    ports:
+      - '5000:3000'  # Mapeia a porta 5000 no host para a porta 3000 no container
