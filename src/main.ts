@@ -50,9 +50,9 @@ async function bootstrap() {
   const port = await findAvailablePort(3000);
 
   app.enableCors({
-    origin: '*', // Permite solicitações de qualquer origem
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept', // Cabeçalhos permitidos
+    origin: 'localhost',
+    methods: 'GET',
+    allowedHeaders: 'Content-Type, Accept',
   });
 
   await app.listen({ port, host: '0.0.0.0' });
