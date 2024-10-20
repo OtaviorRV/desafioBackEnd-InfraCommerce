@@ -8,6 +8,8 @@ import {
 import * as UseCases from '../../application/use-cases';
 import * as Dtos from '../../application/dtos';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import * as Pipes from '../../infrastructure/pipes';
+
 @ApiTags('pokemon')
 @Controller('pokemon')
 export class PokemonController {
@@ -25,7 +27,9 @@ export class PokemonController {
   })
   @ApiResponse({ status: 200, description: 'Pokémons retornados com sucesso.' })
   @ApiResponse({ status: 400, description: 'Erro ao buscar os Pokémons.' })
-  async getPokemonByIdOrName(@Param('colorId') colorId: string) {
+  async getPokemonByIdOrName(
+    @Param('colorId', Pipes.StringOrNoLeadingZerosPipe) colorId: string,
+  ) {
     try {
       const dto: Dtos.GetPokemonsByColorIdDto = { colorId };
 
@@ -52,7 +56,9 @@ export class PokemonController {
   })
   @ApiResponse({ status: 200, description: 'Pokémons retornados com sucesso.' })
   @ApiResponse({ status: 400, description: 'Erro ao buscar os Pokémons.' })
-  async getPokemonsByColorId(@Param('idOrName') idOrName: string) {
+  async getPokemonsByColorId(
+    @Param('idOrName', Pipes.NoLeadingZerosPipe) idOrName: string,
+  ) {
     try {
       const dto: Dtos.GetPokemonByIdOrNameDto = { idOrName };
 
@@ -81,7 +87,9 @@ export class PokemonController {
   })
   @ApiResponse({ status: 200, description: 'Pokémons retornados com sucesso.' })
   @ApiResponse({ status: 400, description: 'Erro ao buscar os Pokémons.' })
-  async getPokemonsPaginated(@Param('page') page: number) {
+  async getPokemonsPaginated(
+    @Param('page', Pipes.GreaterThanZeroPipe) page: number,
+  ) {
     try {
       const dto: Dtos.GetPokemonsPaginatedDto = { page };
       const response = await this.getPokemonPaginated.execute(dto);
