@@ -6,6 +6,8 @@ import {
 
 import { AppModule } from './app.module';
 import * as net from 'net';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { join } from 'path';
 
 const findAvailablePort = async (startPort: number): Promise<number> => {
   return new Promise((resolve, reject) => {
@@ -46,6 +48,20 @@ async function bootstrap() {
       },
     }),
   );
+
+  const config = new DocumentBuilder()
+    .setTitle('Pokémon API')
+    .setDescription('API para buscar Pokémons')
+    .setVersion('1.0')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
+  app.useStaticAssets({
+    root: join(__dirname, '..', 'public'),
+    prefix: '/public/', // opcional
+  });
 
   const port = await findAvailablePort(3000);
 
