@@ -5,7 +5,6 @@ export class NoLeadingZerosPipe implements PipeTransform {
   transform(value: any) {
     const stringValue = value.toString();
 
-    // Verifica se o número tem 0s à esquerda
     if (/^0[0-9]+/.test(stringValue)) {
       throw new BadRequestException('O valor não pode ter zeros à esquerda');
     }

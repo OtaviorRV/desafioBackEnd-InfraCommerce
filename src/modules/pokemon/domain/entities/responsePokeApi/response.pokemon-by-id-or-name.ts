@@ -62,7 +62,7 @@ interface PokemonInfo {
   forms: Form[];
   game_indices: GameIndex[];
   height: number;
-  held_items: any[]; // Ajuste conforme necessário
+  held_items: any[];
   id: number;
   is_default: boolean;
   location_area_encounters: string;

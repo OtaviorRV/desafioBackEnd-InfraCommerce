@@ -11,22 +11,19 @@ import { join } from 'path';
 
 const findAvailablePort = async (startPort: number): Promise<number> => {
   return new Promise((resolve, reject) => {
-    const server = net.createServer(); // Cria um servidor TCP temporário para verificar se a porta está em uso
+    const server = net.createServer();
 
-    server.listen(startPort, '0.0.0.0'); // Tenta ouvir na porta especificada no IP 0.0.0.0 (acessível externamente)
+    server.listen(startPort, '0.0.0.0');
 
-    // Evento chamado quando o servidor consegue ouvir na porta (a porta está livre)
     server.on('listening', () => {
-      server.close(() => resolve(startPort)); // Fecha o servidor e resolve a promise com a porta disponível
+      server.close(() => resolve(startPort));
     });
 
-    // Evento chamado se houver um erro ao tentar ouvir na porta
     server.on('error', (err: any) => {
       if (err.code === 'EADDRINUSE') {
-        // Se o erro for 'EADDRINUSE', significa que a porta está ocupada
-        resolve(findAvailablePort(startPort + 1)); // Tenta a próxima porta recursivamente
+        resolve(findAvailablePort(startPort + 1));
       } else {
-        reject(err); // Se o erro não for 'EADDRINUSE', rejeita a promise com o erro
+        reject(err);
       }
     });
   });
@@ -60,7 +57,7 @@ async function bootstrap() {
 
   app.useStaticAssets({
     root: join(__dirname, '..', 'public'),
-    prefix: '/public/', // opcional
+    prefix: '/public/',
   });
 
   const port = await findAvailablePort(3000);

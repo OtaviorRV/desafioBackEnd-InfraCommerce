@@ -14,7 +14,7 @@ export class GetPokemonsPaginatedUseCase {
     page,
   }: GetPokemonsPaginatedDto): Promise<GetPokemonsPaginatedResponse> {
     const limit = 10;
-    const offset = (page - 1) * limit; // quantos registros pular para a paginação, por exemplo, se a página for 2, pula 10 registros
+    const offset = (page - 1) * limit;
 
     const data = await this.pokemonRepository.getPokemonsPaginated(
       limit,
