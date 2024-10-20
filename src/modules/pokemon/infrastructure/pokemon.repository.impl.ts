@@ -16,23 +16,20 @@ export class PokemonRepositoryImpl implements PokemonRepository {
   }
   async getPokemonsByColorId(
     colorId: string,
-  ): Promise<Responses.ResponsePokemonByIdColor> {
-    const {
-      data: { data, status },
-    } = await pokeApiClient.get<Responses.ResponsePokemonByIdColor>(
+  ): Promise<Responses.ResponsePokemonColor> {
+    const { data } = await pokeApiClient.get<Responses.ResponsePokemonColor>(
       `pokemon-color/${colorId}`,
     );
-    return { data, status };
+    return data;
   }
   async getPokemonByIdOrName(
     idOrName: string,
   ): Promise<Responses.ResponsePokemonByIdOrName> {
-    const {
-      data: { data, status },
-    } = await pokeApiClient.get<Responses.ResponsePokemonByIdOrName>(
-      `pokemon/${idOrName}`,
-    );
+    const { data } =
+      await pokeApiClient.get<Responses.ResponsePokemonByIdOrName>(
+        `pokemon/${idOrName}`,
+      );
 
-    return { data, status };
+    return data;
   }
 }

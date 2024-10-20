@@ -14,6 +14,10 @@ export class GetPokemonByIdOrNameUseCase {
   async execute(
     getPokemonDto: GetPokemonByIdOrNameDto,
   ): Promise<ResponsePokemonByIdOrName> {
-    return this.pokemonRepository.getPokemonByIdOrName(getPokemonDto.idOrName);
+    const data = await this.pokemonRepository.getPokemonByIdOrName(
+      getPokemonDto.idOrName,
+    );
+
+    return data;
   }
 }

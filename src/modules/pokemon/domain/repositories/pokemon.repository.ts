@@ -3,7 +3,7 @@ import * as Responses from '../entities/responsePokeApi';
 export interface PokemonRepository {
   getPokemonsByColorId(
     colorId: string,
-  ): Promise<Responses.ResponsePokemonByIdColor>;
+  ): Promise<Responses.ResponsePokemonColor>;
   getPokemonByIdOrName(
     idOrName: string,
   ): Promise<Responses.ResponsePokemonByIdOrName>;

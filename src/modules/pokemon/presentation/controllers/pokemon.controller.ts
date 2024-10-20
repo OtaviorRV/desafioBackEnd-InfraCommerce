@@ -21,7 +21,7 @@ export class PokemonController {
     try {
       const dto: Dtos.GetPokemonsByColorIdDto = { colorId };
 
-      const response = this.getPokemonsByColorIdUseCase.execute(dto);
+      const response = await this.getPokemonsByColorIdUseCase.execute(dto);
 
       return response;
     } catch (error) {
@@ -40,7 +40,7 @@ export class PokemonController {
     try {
       const dto: Dtos.GetPokemonByIdOrNameDto = { idOrName };
 
-      const response = this.getPokemonByIdOrNameUseCase.execute(dto);
+      const response = await this.getPokemonByIdOrNameUseCase.execute(dto);
 
       return response;
     } catch (error) {
@@ -58,7 +58,7 @@ export class PokemonController {
   async getPokemonsPaginated(@Param('page') page: number) {
     try {
       const dto: Dtos.GetPokemonsPaginatedDto = { page };
-      const response = this.getPokemonPaginated.execute(dto);
+      const response = await this.getPokemonPaginated.execute(dto);
 
       return response;
     } catch (error) {

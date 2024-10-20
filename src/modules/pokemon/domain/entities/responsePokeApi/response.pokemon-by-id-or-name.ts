@@ -62,7 +62,7 @@ interface PokemonInfo {
   forms: Form[];
   game_indices: GameIndex[];
   height: number;
-  held_items: any[]; // Ajuste conforme necessário se os itens forem detalhados
+  held_items: any[]; // Ajuste conforme necessário
   id: number;
   is_default: boolean;
   location_area_encounters: string;
@@ -70,6 +70,5 @@ interface PokemonInfo {
 }
 
 export interface ResponsePokemonByIdOrName {
-  status: number;
   data: PokemonInfo;
 }

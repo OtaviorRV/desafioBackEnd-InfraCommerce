@@ -1,26 +1,11 @@
-interface Language {
+interface PokemonColor {
   name: string;
   url: string;
 }
 
-interface Name {
-  language: Language;
-  name: string;
-}
-
-interface PokemonSpecies {
-  name: string;
-  url: string;
-}
-
-interface PokemonColorInfo {
-  id: number;
-  name: string;
-  names: Name[];
-  pokemon_species: PokemonSpecies[];
-}
-
-export interface ResponsePokemonByIdColor {
-  status: number;
-  data: PokemonColorInfo;
+export interface ResponsePokemonColor {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonColor[];
 }
