@@ -3,7 +3,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import morgan from 'morgan';
+
 import { AppModule } from './app.module';
 import * as net from 'net';
 
@@ -40,15 +40,20 @@ async function bootstrap() {
         transport: {
           target: 'pino-pretty',
           options: {
-            colorize: true, // Adiciona cores aos logs
+            colorize: true,
           },
         },
       },
     }),
   );
 
-  // Chama a função para encontrar uma porta, começando pela porta 3000
   const port = await findAvailablePort(3000);
+
+  app.enableCors({
+    origin: '*', // Permite solicitações de qualquer origem
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept', // Cabeçalhos permitidos
+  });
 
   await app.listen({ port, host: '0.0.0.0' });
 }

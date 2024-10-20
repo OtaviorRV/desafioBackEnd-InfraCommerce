@@ -1,3 +1,4 @@
 export interface PokemonRepository {
-  findByIdOrName(idOrName: string): Promise<any>;
+  getPokemonsByColorId(colorId: string): Promise<any>;
+  getPokemonByIdOrName(idOrName: string): Promise<any>;
 }

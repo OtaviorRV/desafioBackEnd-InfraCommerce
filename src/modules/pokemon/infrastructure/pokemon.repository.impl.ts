@@ -4,9 +4,15 @@ import pokeApiClient from './axios-pokeapi';
 
 @Injectable()
 export class PokemonRepositoryImpl implements PokemonRepository {
-  async findByIdOrName(idOrName: string): Promise<any> {
+  async getPokemonsByColorId(colorId: string): Promise<any> {
+    const { status, data } = await pokeApiClient.get(
+      `pokemon-color/${colorId}`,
+    );
+    return { status, data };
+  }
+  async getPokemonByIdOrName(idOrName: string): Promise<any> {
     const { data } = await pokeApiClient.get(`pokemon/${idOrName}`);
 
-    return data;
+    return { status, data };
   }
 }

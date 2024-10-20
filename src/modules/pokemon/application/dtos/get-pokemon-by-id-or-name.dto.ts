@@ -1,6 +1,3 @@
-import { IsString, IsNotEmpty } from 'class-validator';
-export class GetPokemonDto {
-  @IsString()
-  @IsNotEmpty()
+export class GetPokemonByIdOrNameDto {
   idOrName: string;
 }
